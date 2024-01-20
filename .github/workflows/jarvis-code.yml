@@ -24,4 +24,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+      - name: Check Status
+        run: |
+          # Curl the GitHub Status API and use jq to extract the "status" object
+          status_json=$(curl -s https://www.githubstatus.com/api/v2/status.json)
+          status_object=$(echo "$status_json" | jq '.status')
+
+          # Print the extracted status object
+          echo "GitHub Status: $status_object"
         
